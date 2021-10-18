@@ -8,6 +8,21 @@ namespace DataStructuresWithLinkedLists
     {
         static void Main(string[] args)
         {
+
+            // Print NGE for every element
+            printNGE();
+
+            // Implement a Queue using 2 stacks s1 and s2
+            MyQueue q = new MyQueue();
+            Console.WriteLine("Enqueue 10, 20, 30, 40");
+            q.Enqueue(10);
+            q.Enqueue(20);
+            q.Enqueue(30);
+            q.Enqueue(40);
+
+            Console.WriteLine("Enqueue 10, 20, 30, 40");
+            q.PrintQueue();
+
             // Implement LRU Cache 
             LRUCache lc = new LRUCache();
             Console.WriteLine("This is given LRU Cache of capacity 3");
@@ -22,9 +37,6 @@ namespace DataStructuresWithLinkedLists
             lc.set(2, 95);
             lc.PrintCache();
 
-            // Print NGE for every element
-            printNGE();
-           
          }
 
         // Given an array, print the Next Greater Element (NGE) for every element. The Next greater
@@ -39,6 +51,7 @@ namespace DataStructuresWithLinkedLists
             int[] arr = { 13, 7, 6, 12 };
             int i, j, nge;
 
+            Console.WriteLine("For given array { 13, 7, 6, 12 }");
             Console.WriteLine($"Element  -->   NGE");
             for (i = 0; i < arr.Length; i++)
             {
@@ -54,12 +67,12 @@ namespace DataStructuresWithLinkedLists
                 }
                 Console.WriteLine($"{arr[i]}  --> {nge}");
             }
+
+            Console.Write("____________________________________________________________");
+            Console.WriteLine();
         }
 
-        // Implement a Queue using 2 stackss1 and s2.
-
-
-
+   
     }
 
     public class Node
@@ -100,19 +113,15 @@ namespace DataStructuresWithLinkedLists
     public class LRUCache
     {
         private KeyValueNode head;
-        private KeyValueNode tail;
         int Capacity;
         int Length;
-
         public LRUCache()
         {
             head = new KeyValueNode();
-
             head.next = null;
             Capacity = 3;
             Length = 0;
         }
-
         public void AddToFront(int x, int y)
         {
             KeyValueNode newNode = new KeyValueNode();
@@ -121,8 +130,6 @@ namespace DataStructuresWithLinkedLists
             newNode.next = head;
             head = newNode;
         }
-
-        // Drop the node at head. Move all nodes and 
         public void DropLastNode()
         {
             KeyValueNode currNode = head;
@@ -132,7 +139,6 @@ namespace DataStructuresWithLinkedLists
             }
             currNode.next = null;
         }
-
         public int get(int x)
         {
             KeyValueNode currNode = head;
@@ -145,10 +151,8 @@ namespace DataStructuresWithLinkedLists
                 }
                 currNode = currNode.next;
             }
-
             return -1;
         }
-
         public void set(int x, int y)
         {
             DeleteNode(x);
@@ -159,7 +163,6 @@ namespace DataStructuresWithLinkedLists
             AddToFront(x, y);
             Length++;
         }
-
         public void DeleteNode(int x)
         {
             KeyValueNode currNode = head;
@@ -193,16 +196,54 @@ namespace DataStructuresWithLinkedLists
 
     public class MyQueue
     {
-        Stack s1;
-        Stack s2;
+        public Stack s1; //main queue
+        public Stack s2; //temp holder
 
+        public MyQueue()
+        {
+            Stack s1 = new Stack();
+            Stack s2 = new Stack();
+        }
         public void Enqueue(int x)
         {
-            
+            int i;
+            int y;
+
+            if(s1.Count == 0)
+            {
+                s1.Push(x);
+            }
+            else
+            {
+                for(i = 0; i < s1.Count; i ++)
+                {
+                    y = (int)s1.Pop();
+                    s2.Push(y);
+                }
+                s1.Push(x);
+                for (i = 0; i < s2.Count; i++)
+                {
+                    y = (int)s2.Pop();
+                    s1.Push(y);
+                }
+            }
         }
         public int Dequeue()
         {
-            return 1;
+            int x = s1.Pop();
+            return x;
+        }
+
+        public void PrintQueue()
+        {
+            int x;
+
+            Console.WriteLine();
+            for (int i = 0; i <= s1.Count; i++)
+            {
+                x = (int)s1.Pop();
+                Console.WriteLine(x);
+            }
         }
     }
 }
