@@ -2,7 +2,7 @@
 
 Video Link for Question #1 https://youtu.be/RueHddSi-6w
 
-Video Link for Question #2 https://youtu.be/RueHddSi-6w
+Video Link for Question #2 https://youtu.be/6KMyDwhUR6Y
 
 Video Link for Question #3 https://youtu.be/RueHddSi-6w
 
