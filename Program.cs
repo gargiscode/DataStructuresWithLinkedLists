@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace DataStructuresWithLinkedLists
 {
@@ -8,14 +10,56 @@ namespace DataStructuresWithLinkedLists
         {
             // Implement LRU Cache 
             LRUCache lc = new LRUCache();
-            Console.WriteLine("This is given LRU Cache");
+            Console.WriteLine("This is given LRU Cache of capacity 3");
 
             lc.set(1, 235);
             lc.set(2, 896);
             lc.set(3, 529);
+            lc.PrintCache();
+            Console.WriteLine();
+            Console.WriteLine("Insert 2, 95");
+
             lc.set(2, 95);
             lc.PrintCache();
+
+            // Print NGE for every element
+            printNGE();
+           
          }
+
+        // Given an array, print the Next Greater Element (NGE) for every element. The Next greater
+        // Element for an element x is the first greater element on the right side of x in array.
+        // Elements for which no greater element exist, consider next greater element as -1. Examples:
+        // a) For any array, rightmost element always has next greater element as -1.
+        // b) For an array which is sorted in decreasing order, all elements have next greater element as -1.
+        // c) For the input array[4, 5, 2, 25}, the next greater elements for each element are as follows.
+
+        static void printNGE()
+        {
+            int[] arr = { 13, 7, 6, 12 };
+            int i, j, nge;
+
+            Console.WriteLine($"Element  -->   NGE");
+            for (i = 0; i < arr.Length; i++)
+            {
+                nge = -1;
+                for (j = i + 1; j < arr.Length; j++)
+                {
+                    if (arr[j] > arr[i])
+                    {
+                        //Console.WriteLine($"{arr[i]}  --> {arr[j]}");
+                        nge = arr[j];
+                        break;
+                    }
+                }
+                Console.WriteLine($"{arr[i]}  --> {nge}");
+            }
+        }
+
+        // Implement a Queue using 2 stackss1 and s2.
+
+
+
     }
 
     public class Node
@@ -53,7 +97,7 @@ namespace DataStructuresWithLinkedLists
     // If the cache reaches its capacity it should invalidate the least
     // recently used item before inserting the new item. In the constructor
     // of the class the size of the cache should be initialized.
-    class LRUCache
+    public class LRUCache
     {
         private KeyValueNode head;
         private KeyValueNode tail;
@@ -63,7 +107,7 @@ namespace DataStructuresWithLinkedLists
         public LRUCache()
         {
             head = new KeyValueNode();
-            
+
             head.next = null;
             Capacity = 3;
             Length = 0;
@@ -93,7 +137,7 @@ namespace DataStructuresWithLinkedLists
         {
             KeyValueNode currNode = head;
             //currNode = head;
-            while(currNode.next != null)
+            while (currNode.next != null)
             {
                 if (currNode.key == x)
                 {
@@ -145,5 +189,20 @@ namespace DataStructuresWithLinkedLists
             while (currNode.next != null);
         }
 
+    }
+
+    public class MyQueue
+    {
+        Stack s1;
+        Stack s2;
+
+        public void Enqueue(int x)
+        {
+            
+        }
+        public int Dequeue()
+        {
+            return 1;
+        }
     }
 }
